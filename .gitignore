@@ -1,0 +1,41 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+src/main/java/com/BubbleWomen/bubbleWomenBackEnd/config/SafetyWeighting.java
+src/main/java/com/BubbleWomen/bubbleWomenBackEnd/controller/LocationController.java
+src/main/java/com/BubbleWomen/bubbleWomenBackEnd/model/EdgeRating.java
+src/main/java/com/BubbleWomen/bubbleWomenBackEnd/model/NodeRating.java
+src/main/java/com/BubbleWomen/bubbleWomenBackEnd/repo/EdgeRatingRepository.java
+src/main/java/com/BubbleWomen/bubbleWomenBackEnd/repo/NodeRatingRepository.java
+src/main/java/com/BubbleWomen/bubbleWomenBackEnd/service/RatingService.java
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
