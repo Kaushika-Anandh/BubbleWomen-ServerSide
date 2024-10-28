@@ -19,7 +19,7 @@ target/
 *.iml
 *.ipr
 
-
+src/main/resources/static/bubblenotification-d5ab7-firebase-adminsdk-8wwa6-816716bb52.json
 
 ### NetBeans ###
 /nbproject/private/
