@@ -19,13 +19,13 @@ target/
 *.iml
 *.ipr
 
-src/main/java/com/BubbleWomen/bubbleWomenBackEnd/config/SafetyWeighting.java
-src/main/java/com/BubbleWomen/bubbleWomenBackEnd/controller/LocationController.java
-src/main/java/com/BubbleWomen/bubbleWomenBackEnd/model/EdgeRating.java
-src/main/java/com/BubbleWomen/bubbleWomenBackEnd/model/NodeRating.java
-src/main/java/com/BubbleWomen/bubbleWomenBackEnd/repo/EdgeRatingRepository.java
-src/main/java/com/BubbleWomen/bubbleWomenBackEnd/repo/NodeRatingRepository.java
-src/main/java/com/BubbleWomen/bubbleWomenBackEnd/service/RatingService.java
+#src/main/java/com/BubbleWomen/bubbleWomenBackEnd/config/SafetyWeighting.java
+#src/main/java/com/BubbleWomen/bubbleWomenBackEnd/controller/LocationController.java
+#src/main/java/com/BubbleWomen/bubbleWomenBackEnd/model/EdgeRating.java
+#src/main/java/com/BubbleWomen/bubbleWomenBackEnd/model/NodeRating.java
+#src/main/java/com/BubbleWomen/bubbleWomenBackEnd/repo/EdgeRatingRepository.java
+#src/main/java/com/BubbleWomen/bubbleWomenBackEnd/repo/NodeRatingRepository.java
+#src/main/java/com/BubbleWomen/bubbleWomenBackEnd/service/RatingService.java
 
 ### NetBeans ###
 /nbproject/private/
