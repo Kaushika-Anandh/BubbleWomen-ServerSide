@@ -31,7 +31,7 @@ public class LocationController {
             @RequestBody LocationPostDTO input){
         try {
             LocationPost post = locationPostService.saveLocationPost(
-                    input.getLongitude(), input.getLatitude(), input.getMessage());
+                    input.getLongitude(), input.getLatitude(), input.getMessage(), input.getTimestamp(), input.getHashtag());
             return ResponseEntity.ok(post);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

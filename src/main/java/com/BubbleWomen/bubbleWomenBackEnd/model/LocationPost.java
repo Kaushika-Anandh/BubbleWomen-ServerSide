@@ -17,10 +17,31 @@ public class LocationPost {
     @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
     private GeoJsonPoint location;
 
-    public LocationPost(GeoJsonPoint location, String message) {
+    private String timestamp;
+    private String hashtag;
+
+    public LocationPost(GeoJsonPoint location, String message, String timestamp, String hashtag) {
 
         this.location = location;
         this.message = message;
+        this.timestamp = timestamp;
+        this.hashtag = hashtag;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getHashtag() {
+        return hashtag;
+    }
+
+    public void setHashtag(String hashtag) {
+        this.hashtag = hashtag;
     }
 
     public String getMessage() {

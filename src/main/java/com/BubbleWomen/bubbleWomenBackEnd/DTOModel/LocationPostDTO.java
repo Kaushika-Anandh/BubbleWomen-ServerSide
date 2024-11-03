@@ -4,6 +4,24 @@ public class LocationPostDTO {
     private double longitude;
     private double latitude;
     private String message;
+    private String timestamp;
+    private String hashtag;
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getHashtag() {
+        return hashtag;
+    }
+
+    public void setHashtag(String hashtag) {
+        this.hashtag = hashtag;
+    }
 
     public double getLongitude() {
         return longitude;

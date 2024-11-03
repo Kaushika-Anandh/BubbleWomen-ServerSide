@@ -16,8 +16,8 @@ public class LocationPostService {
     @Autowired
     private LocationPostRepository locationPostRepository;
 
-    public LocationPost saveLocationPost( double longitude, double latitude, String message) {
-        LocationPost post = new LocationPost(new GeoJsonPoint(latitude, longitude), message);
+    public LocationPost saveLocationPost( double longitude, double latitude, String message, String time, String hashtag) {
+        LocationPost post = new LocationPost(new GeoJsonPoint(latitude, longitude), message, time, hashtag);
         return locationPostRepository.save(post);
     }
 
