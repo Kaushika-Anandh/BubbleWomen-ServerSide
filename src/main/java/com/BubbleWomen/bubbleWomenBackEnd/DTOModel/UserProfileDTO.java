@@ -1,17 +1,24 @@
-package com.BubbleWomen.bubbleWomenBackEnd.model;
+package com.BubbleWomen.bubbleWomenBackEnd.DTOModel;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "userProfile")
-public class UserProfile {
+public class UserProfileDTO {
     private String firstName;
     private String lastName;
     private String userName;
+    private String password;
 
-    public UserProfile(String firstName, String lastName, String userName) {
+    public UserProfileDTO(String firstName, String lastName, String userName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {

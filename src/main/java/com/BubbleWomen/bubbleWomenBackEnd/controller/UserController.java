@@ -1,5 +1,7 @@
 package com.BubbleWomen.bubbleWomenBackEnd.controller;
 
+import com.BubbleWomen.bubbleWomenBackEnd.DTOModel.UserProfileDTO;
+import com.BubbleWomen.bubbleWomenBackEnd.model.UserProfile;
 import com.BubbleWomen.bubbleWomenBackEnd.model.Users;
 import com.BubbleWomen.bubbleWomenBackEnd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public Users register(@RequestBody Users user){
+    public Users register(@RequestBody UserProfileDTO userProfileDTO){
+        Users user = new Users(userProfileDTO.getUserName(), userProfileDTO.getPassword());
+        UserProfile userProfile = new UserProfile(userProfileDTO.getFirstName(), userProfileDTO.getLastName(), userProfileDTO.getUserName());
+        userService.registerUserProfile(userProfile);
         return userService.registerUser(user);
     }
 

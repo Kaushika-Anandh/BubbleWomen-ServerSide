@@ -1,5 +1,8 @@
 package com.BubbleWomen.bubbleWomenBackEnd.service;
+import com.BubbleWomen.bubbleWomenBackEnd.DTOModel.UserProfileDTO;
+import com.BubbleWomen.bubbleWomenBackEnd.model.UserProfile;
 import com.BubbleWomen.bubbleWomenBackEnd.model.Users;
+import com.BubbleWomen.bubbleWomenBackEnd.repo.UserProfileRepository;
 import com.BubbleWomen.bubbleWomenBackEnd.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +21,11 @@ public class UserService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private UserProfileRepository userProfileRepository;
+
+    @Autowired
     private JWTService jwtService;
+
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
 
     public Users registerUser(Users user){
@@ -34,5 +41,9 @@ public class UserService {
         else{
             return "User failed";
         }
+    }
+
+    public void registerUserProfile(UserProfile userProfile) {
+        userProfileRepository.save(userProfile);
     }
 }
