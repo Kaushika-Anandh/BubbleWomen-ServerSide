@@ -1,32 +1,44 @@
 package com.BubbleWomen.bubbleWomenBackEnd.controller;
 
-import com.BubbleWomen.bubbleWomenBackEnd.model.EdgeRating;
-import com.BubbleWomen.bubbleWomenBackEnd.service.RatingService;
-import com.graphhopper.util.EdgeIteratorState;
+import com.BubbleWomen.bubbleWomenBackEnd.DTOModel.LocationNearbyDTO;
+import com.BubbleWomen.bubbleWomenBackEnd.DTOModel.RatingDTO;
+import com.BubbleWomen.bubbleWomenBackEnd.model.NodeRating;
+import com.BubbleWomen.bubbleWomenBackEnd.service.NodeRatingService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/ratings")
+@RequestMapping("api/ratings")
+@RequiredArgsConstructor
 public class RatingController {
     @Autowired
-    private RatingService ratingService;
+    private NodeRatingService nodeRatingService;
 
-    @PostMapping("/coordinates")
+    @PostMapping("/rate")
     public ResponseEntity<Void> addRating(
-            @RequestParam double latitude,
-            @RequestParam double longitude,
-            @RequestParam int rating) {
-
-        ratingService.addRating(latitude, longitude, rating);
+            @RequestBody RatingDTO input){
+        nodeRatingService.saveLocationRating(input.getLatitude(), input.getLongitude(), input.getRating());
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{edgeId}")
-    public ResponseEntity<EdgeRating> getEdgeRating(@PathVariable String edgeId) {
-        EdgeRating edgeRating = ratingService.getEdgeRating(edgeId);
-        return edgeRating != null ? ResponseEntity.ok(edgeRating) : ResponseEntity.notFound().build();
+    @GetMapping("/averageNearbyRating")
+    public ResponseEntity<Double> getAverageNearbyRating(
+            @RequestBody LocationNearbyDTO input) {
+        // Find nearby ratings
+        List<NodeRating> nearbyRatings = nodeRatingService.
+                findNearbyRatings(input.getLongitude(), input.getLatitude(), input.getMaxDistanceKm());
+        // Calculate the average rating
+//        System.out.println(nearbyRatings);
+        double averageRating = nodeRatingService.calculateAverageRating(nearbyRatings);
+
+        // Return the average rating as a response entity
+        return new ResponseEntity<>(averageRating, HttpStatus.OK);
     }
+
 }

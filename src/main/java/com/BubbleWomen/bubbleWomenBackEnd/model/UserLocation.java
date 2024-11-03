@@ -21,28 +21,39 @@ public class UserLocation {
     @Field("userId")
     private String userId;
 
-    @Field("fcmToken")
-    private String fcmToken;
+//    @Field("fcmToken")
+//    private String fcmToken;
+
+    @Field("expoToken")
+    private String expoToken;
 
     // Changed to use GeoJSON Point type
     @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
     private GeoJsonPoint location;
 
-//    public UserLocation() {
-//    }
 
-    public UserLocation(String userId, String fcmToken , double longitude, double latitude) {
+    public UserLocation(String userId, String expoToken , double longitude, double latitude) {
         this.userId = userId;
-        this.fcmToken = fcmToken;
+        this.expoToken = expoToken;
         this.location = new GeoJsonPoint(longitude, latitude);
     }
 
-    public String getFcmToken() {
-        return fcmToken;
+
+//    public String getFcmToken() {
+//        return fcmToken;
+//    }
+//
+//    public void setFcmToken(String fcmToken) {
+//        this.fcmToken = fcmToken;
+//    }
+
+
+    public String getExpoToken() {
+        return expoToken;
     }
 
-    public void setFcmToken(String fcmToken) {
-        this.fcmToken = fcmToken;
+    public void setExpoToken(String expoToken) {
+        this.expoToken = expoToken;
     }
 
     public String getId() {

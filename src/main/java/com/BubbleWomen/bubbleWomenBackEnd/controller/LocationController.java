@@ -1,10 +1,11 @@
 package com.BubbleWomen.bubbleWomenBackEnd.controller;
 
+import com.BubbleWomen.bubbleWomenBackEnd.DTOModel.LocationNearbyDTO;
+import com.BubbleWomen.bubbleWomenBackEnd.DTOModel.LocationPostDTO;
+import com.BubbleWomen.bubbleWomenBackEnd.DTOModel.UserLocationDTO;
 import com.BubbleWomen.bubbleWomenBackEnd.model.LocationPost;
 import com.BubbleWomen.bubbleWomenBackEnd.model.UserLocation;
-import com.BubbleWomen.bubbleWomenBackEnd.service.JWTService;
 import com.BubbleWomen.bubbleWomenBackEnd.service.LocationPostService;
-import com.BubbleWomen.bubbleWomenBackEnd.service.RatingService;
 import com.BubbleWomen.bubbleWomenBackEnd.service.UserLocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/location")
+@RequestMapping("/api/location")
 @RequiredArgsConstructor
 public class LocationController {
 
@@ -27,15 +28,10 @@ public class LocationController {
 
     @PostMapping("blog/save")
     public ResponseEntity<LocationPost> saveLocationPost(
-            @RequestParam String userId,
-            @RequestParam String postId,
-            @RequestParam double longitude,
-            @RequestParam double latitude,
-            @RequestParam String message
-    ){
+            @RequestBody LocationPostDTO input){
         try {
             LocationPost post = locationPostService.saveLocationPost(
-                    userId, postId, longitude, latitude, message);
+                    input.getLongitude(), input.getLatitude(), input.getMessage());
             return ResponseEntity.ok(post);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -44,17 +40,10 @@ public class LocationController {
 
     @GetMapping("blog/nearby")
     public ResponseEntity<List<LocationPost>> findNearbyPosts(
-            @RequestParam String currentUserId,
-            @RequestParam double longitude,
-            @RequestParam double latitude,
-            @RequestParam double maxDistanceKm) {
+            @RequestBody LocationNearbyDTO input) {
         try {
             List<LocationPost> nearbyUsers = locationPostService.findNearbyPosts(
-                    currentUserId,
-                    longitude,
-                    latitude,
-                    maxDistanceKm
-            );
+                    input.getLongitude(), input.getLatitude(), input.getMaxDistanceKm());
             return ResponseEntity.ok(nearbyUsers);
         } catch (Exception e) {
             System.out.println(e);
@@ -62,34 +51,23 @@ public class LocationController {
         }
     }
 
-    @PostMapping("/save")
+    @PostMapping("user/save")
     public ResponseEntity<UserLocation> saveLocation(
-            @RequestParam String userId,
-            @RequestParam String fcmToken,
-            @RequestParam double longitude,
-            @RequestParam double latitude) {
+            @RequestBody UserLocationDTO input) {
         try {
             UserLocation location = userLocationService.saveUserLocation(
-                    userId, fcmToken, longitude, latitude);
+                    input.getUserId(), input.getExpoToken(), input.getLongitude(), input.getLatitude());
             return ResponseEntity.ok(location);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    @GetMapping("/nearby")
-    public ResponseEntity<List<UserLocation>> findNearbyUsers(
-            @RequestParam String currentUserId,
-            @RequestParam double longitude,
-            @RequestParam double latitude,
-            @RequestParam double maxDistanceKm) {
+    @GetMapping("user/nearby")
+    public ResponseEntity<List<UserLocation>> findNearbyUsers(@RequestBody LocationNearbyDTO input) {
         try {
             List<UserLocation> nearbyUsers = userLocationService.findNearbyUsers(
-                    currentUserId,
-                    longitude,
-                    latitude,
-                    maxDistanceKm
-            );
+                    input.getLongitude(), input.getLatitude(), input.getMaxDistanceKm());
             return ResponseEntity.ok(nearbyUsers);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

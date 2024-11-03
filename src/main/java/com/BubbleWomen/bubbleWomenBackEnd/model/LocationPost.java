@@ -5,18 +5,11 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "locationPost")
 public class LocationPost {
     @Id
     private String id;
-
-    @Field("userId")
-    private String userId;
-
-    @Field("postId")
-    private String postId;
 
     private String message;
 
@@ -24,9 +17,8 @@ public class LocationPost {
     @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
     private GeoJsonPoint location;
 
-    public LocationPost(String userId, String postId, GeoJsonPoint location, String message) {
-        this.userId = userId;
-        this.postId = postId;
+    public LocationPost(GeoJsonPoint location, String message) {
+
         this.location = location;
         this.message = message;
     }
@@ -47,21 +39,6 @@ public class LocationPost {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getPostId() {
-        return postId;
-    }
-
-    public void setPostId(String postId) {
-        this.postId = postId;
-    }
 
     public GeoJsonPoint getLocation() {
         return location;
